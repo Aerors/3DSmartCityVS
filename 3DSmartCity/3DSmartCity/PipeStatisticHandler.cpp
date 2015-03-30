@@ -119,11 +119,8 @@ bool PipeStatisticHandler::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIAct
 					{
 						char* s = PQgetvalue(res,j,0);
 						char* t = PQgetvalue(res,j,1);
-						//(*ppStatisticDlg)->m_statisticResult.AddString(s); 
-						//(*ppStatisticDlg)->m_list.
 						int nRow = (*ppStatisticDlg)->m_list.InsertItem(0, s);//插入行
 						(*ppStatisticDlg)->m_list.SetItemText(nRow, 1, t);//设置数据
-						
 					}
 
 					firstClickedFlag = false;

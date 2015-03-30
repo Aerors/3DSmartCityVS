@@ -204,6 +204,7 @@
     <ClInclude Include="3DSmartCityDoc.h" />
     <ClInclude Include="3DSmartCityView.h" />
     <ClInclude Include="DBConnection.h" />
+    <ClInclude Include="HighLightVisitor.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="makeSql.h" />
     <ClInclude Include="OSGObject.h" />
@@ -220,6 +221,7 @@
     <ClCompile Include="3DSmartCityDoc.cpp" />
     <ClCompile Include="3DSmartCityView.cpp" />
     <ClCompile Include="DBConnection.cpp" />
+    <ClCompile Include="HighLightVisitor.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="makeSql.cpp" />
     <ClCompile Include="OSGObject.cpp" />

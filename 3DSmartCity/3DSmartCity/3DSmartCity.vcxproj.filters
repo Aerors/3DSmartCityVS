@@ -96,6 +96,9 @@
     <ClInclude Include="makeSql.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="HighLightVisitor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3DSmartCity.cpp">
@@ -132,6 +135,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="makeSql.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="HighLightVisitor.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
