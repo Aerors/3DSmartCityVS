@@ -9,9 +9,11 @@
 #include <osgEarthUtil/Sky>
 #include <osgEarth/ImageLayer>
 #include "3DSmartCity.h"
-using namespace std;
-
 #include "PipeStatisticHandler.h"
+#include "HeadFiles.h"
+#include "AddPipe.h"
+#include "AddFlagDlg.h"
+#include "AddClick.h"
 
 
 using namespace osgEarth;
@@ -37,6 +39,18 @@ public:
 	void rmvChinaBounds();
 	void addChinaBounds();
 
+	void addPipe(string pipeName,string pointName);
+
+
+	//biaohui--mark
+	CAddFlagDlg *addlg;
+	bool closeWindows;
+	void addFlag();	
+	osg::ref_ptr<osg::Group> mLabels;
+
+	//画线启用标志
+	bool isDrawLineStart;
+	osg::ref_ptr<osg::Group> mCSLine;
 
 //dc--管线统计--------------------------------------------------------------------------
 public:

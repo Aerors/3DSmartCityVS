@@ -6,6 +6,9 @@ COSGObject::COSGObject(HWND hWnd)
 {
 	n_hWnd = hWnd;
 
+	isDrawLineStart=false;
+	closeWindows=false;
+
 	pStatisticDlg =  new StatisticDialog();
 	pipes=new map<string ,string>;
 	pipes->insert(pair<string,string>("ysgline_new","ysgpoint_new"));
@@ -27,20 +30,12 @@ void COSGObject::InitSceneGraph()
 {
 	//初始化场景图
 	mRoot=new osg::Group;
+	mLabels=new osg::Group;
 	osg::ref_ptr<osg::Node> mp=osgDB::readNodeFile("E:/HRB/china-simple2.earth");
 	mRoot->addChild(mp);
+	mRoot->addChild(mLabels);
 	mapNode=dynamic_cast<osgEarth::MapNode*>(mp.get());
-	//获取图层
-	mapNode->getMap()->getImageLayers(imageLayerVec);
-	for (osgEarth::ImageLayerVector::iterator it=imageLayerVec.begin();it!=imageLayerVec.end();it++)
-	{
-		layernames.push_back(it->get()->getName());
-	}
-	mapNode->getMap()->getModelLayers(modelLayerVec);
-	for (ModelLayerVector::iterator it=modelLayerVec.begin();it!=modelLayerVec.end();it++)
-	{
-		layernames.push_back(it->get()->getName());
-	}
+	
 }
 void COSGObject::InitCameraConfig()//初始化相机
 {
@@ -67,6 +62,16 @@ void COSGObject::InitCameraConfig()//初始化相机
 	camera->setGraphicsContext(gc);
 	camera->setViewport(new osg::Viewport(traits->x,traits->y,traits->width,traits->height));
 	camera->setProjectionMatrixAsPerspective(30.0f,static_cast<double> (traits->width)/static_cast<double>(traits->height),1.0,1000.0);
+
+	//begin   dialog of mark
+	addlg=new CAddFlagDlg();
+	addlg->Create(IDD_ADD_DIALOG);
+	addlg->initDlg(mLabels,mapNode);
+	mViewer->addEventHandler(new CAddClick(mapNode,mViewer,&addlg,&closeWindows));
+	//end     dialog of mark
+
+	//begin 横断面分析
+	//end	横断面分析
 
 	//dc begin	管线统计---------------------------------------
 	pStatisticDlg->Create(IDD_TONGJI);
@@ -132,7 +137,25 @@ void COSGObject::InitOsgEarth()
 	skyNode->setDateTime(osgEarth::DateTime(2015,02,13,hours));
 	skyNode->attach(mViewer,3);
 	mRoot->addChild(skyNode);
+
+	//添加雨水管图层
+	map<string, string>::iterator pipes_iter;
+	for (pipes_iter=pipes->begin();pipes_iter!=pipes->end();pipes_iter++)
+	{
+		addPipe(pipes_iter->first,pipes_iter->second);
+	}
+
 	//获取图层
+	mapNode->getMap()->getImageLayers(imageLayerVec);
+	for (osgEarth::ImageLayerVector::iterator it=imageLayerVec.begin();it!=imageLayerVec.end();it++)
+	{
+		layernames.push_back(it->get()->getName());
+	}
+	mapNode->getMap()->getModelLayers(modelLayerVec);
+	for (ModelLayerVector::iterator it=modelLayerVec.begin();it!=modelLayerVec.end();it++)
+	{
+		layernames.push_back(it->get()->getName());
+	}
 
 	china_boundaries=mapNode->getMap()->getImageLayerByName("world_boundaries");
 
@@ -170,6 +193,14 @@ void COSGObject::addChinaBounds()
 	{
 		mapNode->getMap()->addImageLayer(china_boundaries);
 	}
+}
+
+void COSGObject::addPipe(string pipeName,string pointName)
+{
+	AddPipe * addpipes=new AddPipe();
+	addpipes->InitAddPipe(pipeName,pointName);
+	addpipes->Addpipes(mapNode);
+	delete addpipes;
 }
 
 
@@ -223,4 +254,20 @@ void COSGObject::buildingView(void)
 			it->get()->setVisible(false);
 		}
 	}
+}
+
+
+//mark flag  ... HuiGe  你懂得
+void COSGObject::addFlag()
+{
+	if (!addlg->IsWindowVisible())
+	{
+		if (addlg==NULL)
+		{
+			addlg=new CAddFlagDlg();
+			addlg->Create(IDD_ADD_DIALOG);
+			addlg->initDlg(mLabels,mapNode);
+		}		
+		addlg->ShowWindow(SW_NORMAL);
+	}	
 }

@@ -100,6 +100,9 @@
     <ClInclude Include="makeSql.h">
       <Filter>头文件</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="HighLightVisitor.h">
+=======
     <ClInclude Include="AddClick.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -113,6 +116,7 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="HeadFiles.h">
+>>>>>>> e4eac0e1e60c25a76e2d52600c4d4b56e762f5e0
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -153,6 +157,9 @@
     <ClCompile Include="makeSql.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="HighLightVisitor.cpp">
+=======
     <ClCompile Include="AddClick.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -163,6 +170,7 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="PipePoint.cpp">
+>>>>>>> e4eac0e1e60c25a76e2d52600c4d4b56e762f5e0
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

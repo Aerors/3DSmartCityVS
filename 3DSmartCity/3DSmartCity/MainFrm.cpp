@@ -34,6 +34,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWndEx)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CMainFrame::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CMainFrame::OnFilePrintPreview)
 	ON_UPDATE_COMMAND_UI(ID_FILE_PRINT_PREVIEW, &CMainFrame::OnUpdateFilePrintPreview)
+	ON_WM_CLOSE()
 END_MESSAGE_MAP()
 
 // CMainFrame ¹¹Ôì/Îö¹¹
@@ -227,4 +228,13 @@ BOOL CMainFrame::OnCreateClient(LPCREATESTRUCT lpcs, CCreateContext* pContext)
 		pContext);
 
 	return TRUE;
+}
+
+
+void CMainFrame::OnClose()
+{
+	CMainFrame*   pFrame=(CMainFrame*)AfxGetMainWnd();   
+	CMy3DSmartCityView* pView = (CMy3DSmartCityView*)pFrame->GetActiveView();
+	pView->mOSG->closeWindows=true;
+	CFrameWndEx::OnClose();
 }

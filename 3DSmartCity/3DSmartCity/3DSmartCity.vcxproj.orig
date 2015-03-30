@@ -211,7 +211,11 @@
     <ClInclude Include="AddFlagDlg.h" />
     <ClInclude Include="AddPipe.h" />
     <ClInclude Include="DBConnection.h" />
+<<<<<<< HEAD
+    <ClInclude Include="HighLightVisitor.h" />
+=======
     <ClInclude Include="HeadFiles.h" />
+>>>>>>> e4eac0e1e60c25a76e2d52600c4d4b56e762f5e0
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="makeSql.h" />
     <ClInclude Include="OSGObject.h" />
