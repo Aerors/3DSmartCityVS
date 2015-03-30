@@ -1,4 +1,4 @@
-// StatisticDialog.cpp :  µœ÷Œƒº˛
+Ôªø// StatisticDialog.cpp : ÂÆûÁé∞Êñá‰ª∂
 //
 
 #include "stdafx.h"
@@ -6,7 +6,7 @@
 #include "afxdialogex.h"
 
 
-// StatisticDialog ∂‘ª∞øÚ
+// StatisticDialog ÂØπËØùÊ°Ü
 
 IMPLEMENT_DYNAMIC(StatisticDialog, CDialogEx)
 
@@ -29,7 +29,7 @@ StatisticDialog::~StatisticDialog()
 void StatisticDialog::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Control(pDX, IDC_STATISTICLIST, m_statisticResult);
+	//DDX_Control(pDX, IDC_STATISTICLIST, m_statisticResult);
 	//  DDX_Text(pDX, IDC_LEFTLAT, m_leftlat);
 	//  DDV_MinMaxFloat(pDX, m_leftlat, -90, 90);
 	DDX_Text(pDX, IDC_LEFTLON, m_leftlon);
@@ -40,6 +40,7 @@ void StatisticDialog::DoDataExchange(CDataExchange* pDX)
 	DDV_MinMaxDouble(pDX, m_rightlon, -180, 180);
 	DDX_Text(pDX, IDC_LEFTLAT, m_leftlat);
 	DDV_MinMaxDouble(pDX, m_leftlat, -90, 90);
+	DDX_Control(pDX, IDC_LISTR, m_list);
 }
 
 
@@ -49,7 +50,7 @@ BEGIN_MESSAGE_MAP(StatisticDialog, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// StatisticDialog œ˚œ¢¥¶¿Ì≥Ã–Ú
+// StatisticDialog Ê∂àÊÅØÂ§ÑÁêÜÁ®ãÂ∫è
 
 
 //afx_msg LRESULT StatisticDialog::OnUpdatedata(WPARAM wParam, LPARAM lParam)
@@ -63,4 +64,14 @@ afx_msg LRESULT StatisticDialog::OnUpdatedata(WPARAM wParam, LPARAM lParam)
 {
 	UpdateData(wParam);
 	return 0;
+}
+
+
+BOOL StatisticDialog::OnInitDialog()
+{
+	CDialogEx::OnInitDialog();
+	
+	m_list.InsertColumn( 0, "ID", LVCFMT_LEFT, 80 );//ÊèíÂÖ•Âàó
+	m_list.InsertColumn( 1, "Ê†áËØÜÁ†Å", LVCFMT_CENTER, 360 );
+	return TRUE;  // return TRUE unless you set the focus to a control
 }

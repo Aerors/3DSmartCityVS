@@ -27,7 +27,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -68,6 +68,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>D:\OSG\include;D:\osgEarth\osgearth-2.6\include;D:\Program Files\PostgreSQL\9.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Program Files\PostgreSQL\9.3\lib;D:\osgEarth\osgearth-2.6\lib;D:\OSG\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -95,6 +97,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libpq.lib;osgModeling.lib;osg.lib;osgUtil.lib;osgViewer.lib;osgDB.lib;OpenThreads.lib;osgGA.lib;osgEarth.lib;osgEarthUtil.lib;osgEarthAnnotation.lib;osgEarthFeatures.lib;osgEarthSymbology.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -117,7 +120,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>osgModelingd.lib;osgd.lib;osgUtild.lib;osgViewerd.lib;osgDBd.lib;OpenThreadsd.lib;osgGAd.lib;osgEarthd.lib;osgEarthUtild.lib;osgEarthAnnotationd.lib;osgEarthFeaturesd.lib;osgEarthSymbologyd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libpq.lib;osgModelingd.lib;osgd.lib;osgUtild.lib;osgViewerd.lib;osgDBd.lib;OpenThreadsd.lib;osgGAd.lib;osgEarthd.lib;osgEarthUtild.lib;osgEarthAnnotationd.lib;osgEarthFeaturesd.lib;osgEarthSymbologyd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
