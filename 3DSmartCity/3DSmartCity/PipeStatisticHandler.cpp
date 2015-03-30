@@ -107,7 +107,7 @@ bool PipeStatisticHandler::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIAct
 					//as isContain from ysgline_new ) as queryresult where isContain=true
 
 					//char * sql="select gid as gid , st_astext(s.geom) as startPoint,s.地面高程 as startpointelevation ,st_astext(e.geom) as endPoint,e.地面高程 as endpointelevation  from ysgpoint84 as s , ysgpoint84 as e , ysgline84 as line where line.起点点号=s.物探点号 and line.终点点号=e.物探点号";
-					(*ppStatisticDlg)->m_statisticResult.ResetContent();
+					(*ppStatisticDlg)->m_list.DeleteAllItems();
 					DBConnection reader;
 					makeSql ms;
 					reader.ConnectToDB("localhost","5432","HRBPipe","postgres","123456");
@@ -118,9 +118,12 @@ bool PipeStatisticHandler::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIAct
 					for(int j=0;j<tuple_num;++j)
 					{
 						char* s = PQgetvalue(res,j,0);
-						(*ppStatisticDlg)->m_statisticResult.AddString(s);  
 						char* t = PQgetvalue(res,j,1);
-
+						//(*ppStatisticDlg)->m_statisticResult.AddString(s); 
+						//(*ppStatisticDlg)->m_list.
+						int nRow = (*ppStatisticDlg)->m_list.InsertItem(0, s);//插入行
+						(*ppStatisticDlg)->m_list.SetItemText(nRow, 1, t);//设置数据
+						
 					}
 
 					firstClickedFlag = false;

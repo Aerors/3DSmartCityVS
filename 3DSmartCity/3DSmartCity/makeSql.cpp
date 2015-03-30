@@ -15,7 +15,7 @@ makeSql::~makeSql(void)
 string makeSql::makePolySql(double topleftlat,double topleftlon,double bottomrightlat,double bottomrightlon)
 {
 	char* p = "POLYGON((126.652002305689 45.7528259108467, 126.653364042412 45.7528259108467, 126.653364042412 45.747337756813, 126.652002305689 45.747337756813, 126.652002305689 45.7528259108467))')";
-	string begin("select 标识码,gid from (select *,");
+	string begin("select gid,标识码 from (select *,");
 	string end(" as queryresult where isContain=true");
 	string s;
 	ostringstream buf;

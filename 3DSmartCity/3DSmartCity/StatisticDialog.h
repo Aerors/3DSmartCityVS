@@ -1,6 +1,7 @@
 #pragma once
 #include "afxwin.h"
 #include "resource.h"
+#include "afxcmn.h"
 
 #define WM_UPDATEDATA WM_USER+116
 // StatisticDialog ¶Ô»°¿ò
@@ -34,4 +35,7 @@ public:
 protected:
 //	afx_msg LRESULT OnUpdatedata(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnUpdatedata(WPARAM wParam, LPARAM lParam);
+public:
+	CListCtrl m_list;
+	virtual BOOL OnInitDialog();
 };
