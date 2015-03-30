@@ -245,8 +245,6 @@ void COSGObject::buildingView(void)
 	{
 		//mapNode->getMap()->addModelLayer(it->get());
 		//it->get()->setVisible(true);
-		
-		AfxMessageBox(it->get()->getName().c_str());
 		if (pipes->find(it->get()->getName())==pipes->end())
 		{
 			it->get()->setVisible(true);
