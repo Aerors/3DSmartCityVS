@@ -45,6 +45,8 @@ BEGIN_MESSAGE_MAP(CMy3DSmartCityView, CView)
 	ON_COMMAND(ID_GUANXIANTONGJION, &CMy3DSmartCityView::OnGuanxiantongjion)
 	ON_COMMAND(ID_CHANGJINGON, &CMy3DSmartCityView::OnPipeOn)
 	ON_COMMAND(32791, &CMy3DSmartCityView::OnBuildingOn)
+	ON_COMMAND(ID_BIAOHUION, &CMy3DSmartCityView::OnBiaohuion)
+	ON_COMMAND(ID_HENGDUANFENXION, &CMy3DSmartCityView::OnHengduanfenxion)
 END_MESSAGE_MAP()
 
 // CMy3DSmartCityView 构造/析构
@@ -250,4 +252,25 @@ void CMy3DSmartCityView::OnBuildingOn()
 		isFirst=false;
 	}
 	theApp.NeedModify=FALSE;
+}
+
+
+void CMy3DSmartCityView::OnBiaohuion()
+{
+	mOSG->addFlag();
+}
+
+
+void CMy3DSmartCityView::OnHengduanfenxion()
+{
+
+	if(IDYES==MessageBoxA(_T("是否画线选取管线?"),_T("管线选取"),MB_ICONQUESTION+MB_YESNO))  
+	{  
+		mOSG->isDrawLineStart=true;
+	}  
+	else
+	{
+		mOSG->isDrawLineStart=false;
+	}
+
 }

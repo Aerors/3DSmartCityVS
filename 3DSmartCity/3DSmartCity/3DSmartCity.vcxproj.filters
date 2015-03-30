@@ -52,6 +52,10 @@
     <None Include="res\Toolbar256.bmp">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="libeay32.dll" />
+    <None Include="libintl-8.dll" />
+    <None Include="libpq.dll" />
+    <None Include="ssleay32.dll" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3DSmartCity.h">
@@ -96,6 +100,21 @@
     <ClInclude Include="makeSql.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="AddClick.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AddFlagDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="AddPipe.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PipePoint.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HeadFiles.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3DSmartCity.cpp">
@@ -132,6 +151,18 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="makeSql.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AddClick.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AddFlagDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="AddPipe.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PipePoint.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

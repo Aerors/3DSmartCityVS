@@ -36,8 +36,6 @@
 
 #include <afxdisp.h>        // MFC 自动化类
 
-
-
 #ifndef _AFX_NO_OLE_SUPPORT
 #include <afxdtctl.h>           // MFC 对 Internet Explorer 4 公共控件的支持
 #endif
@@ -46,12 +44,6 @@
 #endif // _AFX_NO_AFXCMN_SUPPORT
 
 #include <afxcontrolbars.h>     // 功能区和控件条的 MFC 支持
-
-
-
-
-
-
 
 
 

@@ -117,7 +117,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>osgModelingd.lib;osgd.lib;osgUtild.lib;osgViewerd.lib;osgDBd.lib;OpenThreadsd.lib;osgGAd.lib;osgEarthd.lib;osgEarthUtild.lib;osgEarthAnnotationd.lib;osgEarthFeaturesd.lib;osgEarthSymbologyd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libpq.lib;osgModelingd.lib;osgd.lib;osgUtild.lib;osgViewerd.lib;osgDBd.lib;OpenThreadsd.lib;osgGAd.lib;osgEarthd.lib;osgEarthUtild.lib;osgEarthAnnotationd.lib;osgEarthFeaturesd.lib;osgEarthSymbologyd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -182,6 +182,9 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="libeay32.dll" />
+    <None Include="libintl-8.dll" />
+    <None Include="libpq.dll" />
     <None Include="ReadMe.txt" />
     <None Include="res\3DSmartCity.ico" />
     <None Include="res\3DSmartCityDoc.ico" />
@@ -195,15 +198,21 @@
     <None Include="res\Toolbar256.bmp" />
     <None Include="res\writelarge.bmp" />
     <None Include="res\writesmall.bmp" />
+    <None Include="ssleay32.dll" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="3DSmartCity.h" />
     <ClInclude Include="3DSmartCityDoc.h" />
     <ClInclude Include="3DSmartCityView.h" />
+    <ClInclude Include="AddClick.h" />
+    <ClInclude Include="AddFlagDlg.h" />
+    <ClInclude Include="AddPipe.h" />
     <ClInclude Include="DBConnection.h" />
+    <ClInclude Include="HeadFiles.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="makeSql.h" />
     <ClInclude Include="OSGObject.h" />
+    <ClInclude Include="PipePoint.h" />
     <ClInclude Include="PipeStatisticHandler.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SmartCityTreeCtrl.h" />
@@ -216,10 +225,14 @@
     <ClCompile Include="3DSmartCity.cpp" />
     <ClCompile Include="3DSmartCityDoc.cpp" />
     <ClCompile Include="3DSmartCityView.cpp" />
+    <ClCompile Include="AddClick.cpp" />
+    <ClCompile Include="AddFlagDlg.cpp" />
+    <ClCompile Include="AddPipe.cpp" />
     <ClCompile Include="DBConnection.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="makeSql.cpp" />
     <ClCompile Include="OSGObject.cpp" />
+    <ClCompile Include="PipePoint.cpp" />
     <ClCompile Include="PipeStatisticHandler.cpp" />
     <ClCompile Include="SmartCityTreeCtrl.cpp" />
     <ClCompile Include="SmartCityTreeView.cpp" />

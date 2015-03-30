@@ -20,6 +20,7 @@ SmartCityTreeView::~SmartCityTreeView()
 }
 
 BEGIN_MESSAGE_MAP(SmartCityTreeView, CView)
+	
 END_MESSAGE_MAP()
 
 
