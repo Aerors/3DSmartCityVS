@@ -35,6 +35,7 @@
 #include <osgModeling/Curve>
 #include <osgModeling/Loft>
 
+using namespace std;
 using namespace osgEarth;
 using namespace osgUtil;
 using namespace osgEarth::Util;

@@ -115,6 +115,12 @@
     <ClInclude Include="HeadFiles.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="CSection.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CSectionDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3DSmartCity.cpp">
@@ -163,6 +169,15 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="PipePoint.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="HighLightVisitor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CSection.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CSectionDlg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

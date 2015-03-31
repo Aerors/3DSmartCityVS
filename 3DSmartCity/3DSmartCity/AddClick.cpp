@@ -28,7 +28,7 @@ bool CAddClick::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapte
 			const osgEarth::SpatialReference *m_pGeoSRS = mapNode->getTerrain()->getSRS();
 			osgUtil::LineSegmentIntersector::Intersections inters1;
 			if(mViewer->computeIntersections(ea.getX(),ea.getY(),inters1))
-			{
+			{ 
 				osgUtil::LineSegmentIntersector::Intersections:: iterator iter1 = inters1.begin();
 				m_TempPoint1.set(iter1->getWorldIntersectPoint().x(),iter1->getWorldIntersectPoint().y(),iter1->getWorldIntersectPoint().z());
 				ConvertPoint.fromWorld(m_pGeoSRS,m_TempPoint1);

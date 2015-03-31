@@ -210,6 +210,8 @@
     <ClInclude Include="AddClick.h" />
     <ClInclude Include="AddFlagDlg.h" />
     <ClInclude Include="AddPipe.h" />
+    <ClInclude Include="CSection.h" />
+    <ClInclude Include="CSectionDlg.h" />
     <ClInclude Include="DBConnection.h" />
     <ClInclude Include="HeadFiles.h" />
     <ClInclude Include="MainFrm.h" />
@@ -231,6 +233,8 @@
     <ClCompile Include="AddClick.cpp" />
     <ClCompile Include="AddFlagDlg.cpp" />
     <ClCompile Include="AddPipe.cpp" />
+    <ClCompile Include="CSection.cpp" />
+    <ClCompile Include="CSectionDlg.cpp" />
     <ClCompile Include="DBConnection.cpp" />
     <ClCompile Include="HighLightVisitor.cpp" />
     <ClCompile Include="MainFrm.cpp" />
