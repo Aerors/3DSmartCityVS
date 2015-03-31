@@ -79,6 +79,14 @@ bool PipeStatisticHandler::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIAct
 
 				if (firstClickedFlag)
 				{//µÚ¶þ´ÎË«»÷
+					for(std::vector<std::string>::iterator it=bzms.begin();it!=bzms.end();it++)
+					{
+						std::string bzm("ysgline_new "+ *(it));
+						osg::Node* root= mViewer->getSceneData();
+						HighLightVisitor hlv(bzm,false);
+						root->accept(hlv);
+					}
+
 					//ASSERT(selectPts[0].x!=0 &&selectPts[0].y!=0);
 					(*ppStatisticDlg)->m_rightlat=ConvertPoint.y();
 					(*ppStatisticDlg)->m_rightlon=ConvertPoint.x();
@@ -103,7 +111,6 @@ bool PipeStatisticHandler::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIAct
 
 					drawRect();
 
-					std::vector<std::string> bzms;
 					DBConnection reader;
 					makeSql ms;
 					reader.ConnectToDB("localhost","5432","HRBPipe","postgres","123456");
@@ -114,6 +121,8 @@ bool PipeStatisticHandler::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIAct
 					int tuple_num=PQntuples(res);
 
 					(*ppStatisticDlg)->m_list.DeleteAllItems();
+					bzms.erase(bzms.begin(),bzms.end());
+					ASSERT(bzms.empty());
 
 					for(int j=0;j<tuple_num;++j)
 					{
@@ -125,12 +134,11 @@ bool PipeStatisticHandler::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIAct
 						bzms.push_back(std::string(t));
 					}
 
-					
 					for(std::vector<std::string>::iterator it=bzms.begin();it!=bzms.end();it++)
 					{
 						std::string bzm("ysgline_new "+ *(it));
 						osg::Node* root= mViewer->getSceneData();
-						HighLightVisitor hlv(bzm);
+						HighLightVisitor hlv(bzm,true);
 						root->accept(hlv);
 					}
 

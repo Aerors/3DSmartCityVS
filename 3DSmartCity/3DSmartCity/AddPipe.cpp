@@ -167,6 +167,7 @@ osg::Group* AddPipe::Addpipes(MapNode * mapNode,osg::Group * mRoot)
 	mRoot->addChild(pipeGroup.get());
 	pipeGroup->setName("pipes");
 	pipeGroup->getOrCreateStateSet()->setMode(GL_LIGHTING,osg::StateAttribute::OFF | osg::StateAttribute::OVERRIDE);
+	//pipeGroup->getOrCreateStateSet()->setAttribute(
 	
 	if (*row_num !=0)
 	{
