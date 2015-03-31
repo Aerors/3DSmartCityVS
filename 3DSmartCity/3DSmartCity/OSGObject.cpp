@@ -1,7 +1,6 @@
 #include "StdAfx.h"
 #include "OSGObject.h"
-
-
+#include "HighLightVisitor.h"
 COSGObject::COSGObject(HWND hWnd)
 {
 	n_hWnd = hWnd;
@@ -30,6 +29,7 @@ void COSGObject::InitSceneGraph()
 {
 	//初始化场景图
 	mRoot=new osg::Group;
+	mPipeGroup = new osg::Group;
 	mLabels=new osg::Group;
 	osg::ref_ptr<osg::Node> mp=osgDB::readNodeFile("E:/HRB/china-simple2.earth");
 	mRoot->addChild(mp);
@@ -86,6 +86,8 @@ void COSGObject::InitCameraConfig()//初始化相机
 	mViewer->realize();
 	mViewer->getCamera()->setComputeNearFarMode(osg::CullSettings::COMPUTE_NEAR_USING_PRIMITIVES);
 	mViewer->getCamera()->setNearFarRatio(0.000003f);
+
+	mViewer->addEventHandler(new osgGA::StateSetManipulator(mViewer->getCamera()->getOrCreateStateSet()));
 
 }
 void COSGObject::PreFrameUpdate()
@@ -199,7 +201,9 @@ void COSGObject::addPipe(string pipeName,string pointName)
 {
 	AddPipe * addpipes=new AddPipe();
 	addpipes->InitAddPipe(pipeName,pointName);
-	addpipes->Addpipes(mapNode);
+	//addpipes->Addpipes(mapNode);
+	mPipeGroup = addpipes->Addpipes(mapNode,mRoot);
+	
 	delete addpipes;
 }
 
@@ -215,6 +219,17 @@ void COSGObject::pipeView(void)
 	{
 		//mapNode->getMap()->removeImageLayer(it->get());
 		it->get()->setVisible(false);
+	}
+
+	int num = mRoot->getNumChildren();
+	osg::Node* child;
+	for(int i=0;i<num;i++)
+	{
+		child = mRoot->getChild(i);
+		if(child->getName().compare("pipes") == 0)
+		{
+			child->setNodeMask(0xffffffff);
+		}
 	}
 
 	for (ModelLayerVector::iterator it=modelLayerVec.begin();it!=modelLayerVec.end();it++)
@@ -239,6 +254,18 @@ void COSGObject::buildingView(void)
 	{
 		//mapNode->getMap()->addImageLayer(it->get());
 		it->get()->setVisible(true);
+	}
+
+	int num = mRoot->getNumChildren();
+	osg::Node* child;
+	for(int i=0;i<num;i++)
+	{
+		child = mRoot->getChild(i);
+		if(child->getName().compare("pipes") == 0)
+		{
+			child->setNodeMask(0x00);
+			
+		}
 	}
 
 	for (ModelLayerVector::iterator it=modelLayerVec.begin();it!=modelLayerVec.end();it++)

@@ -62,6 +62,7 @@ public:
 
 	//------wangsongwei  加上模型层控制
 	ModelLayerVector modelLayerVec;
+	osg::ref_ptr<osg::Group> mPipeGroup;
 
 
 private:

@@ -7,11 +7,13 @@ class HighLightVisitor :
 	public osg::NodeVisitor
 {
 public:
-	HighLightVisitor(void);
+	HighLightVisitor(std::string str);
 	~HighLightVisitor(void);
 
-	virtual void apply(osg::Node& node);//虚函数，访问各种节点类型，并执行访问器中的自定义操作
-	virtual void apply(osg::Group& node);
 	virtual void apply(osg::Geode& node);
+
+private:
+	std::string m_bzm;//标识码
+
 };
 

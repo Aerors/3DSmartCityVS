@@ -17,6 +17,7 @@ public:
 	void InitAddPipe(string lineTableName,string pointTableName,string host="localhost",string port="5432",string database="HRBPipe",string userName="postgres",string pwd="123456");
 	//void InitAddPipe(string lineTableName,string pointTableName,string host,string port,string database,string userName,string pwd);
 	void Addpipes(MapNode * mapNode);
+	osg::Group* Addpipes(MapNode * mapNode,osg::Group * mRoot);
 	char *callBackValue(char *(*callfunct)(const PGresult * res,int tup_num,int field_num),const PGresult * res,int tup_num,int field_num);
 
 	
