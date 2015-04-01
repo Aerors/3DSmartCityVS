@@ -58,9 +58,10 @@ void PipeStatisticHandler::drawRect()
 //	return sql;
 //}
 
+
 bool PipeStatisticHandler::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIActionAdapter& aa)
 {
-	if((*ppStatisticDlg)->IsWindowVisible())
+	if( !theApp.closeWindows &&(*ppStatisticDlg)->IsWindowVisible())
 	{
 		switch(ea.getEventType())
 		{

@@ -56,6 +56,7 @@ CMy3DSmartCityApp::CMy3DSmartCityApp()
 	SetAppID(_T("3DSmartCity.AppID.NoVersion"));
 
 	// TODO: 在此处添加构造代码，
+	closeWindows=false;
 	// 将所有重要的初始化放置在 InitInstance 中
 }
 

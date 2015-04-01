@@ -236,5 +236,6 @@ void CMainFrame::OnClose()
 	CMainFrame*   pFrame=(CMainFrame*)AfxGetMainWnd();   
 	CMy3DSmartCityView* pView = (CMy3DSmartCityView*)pFrame->GetActiveView();
 	pView->mOSG->closeWindows=true;
+	theApp.closeWindows=true;
 	CFrameWndEx::OnClose();
 }

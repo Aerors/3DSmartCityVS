@@ -37,7 +37,7 @@ public:
 
 	BOOL NeedModify;
 	BOOL CanModify;
-
+	bool closeWindows;
 // й╣ож
 	UINT  m_nAppLook;
 	virtual void PreLoadState();

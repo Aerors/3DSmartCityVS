@@ -8,6 +8,7 @@
 #include "StatisticDialog.h"
 #include <osgEarth/MapNode>
 #include <osgEarthAnnotation/RectangleNode>
+#include "3DSmartCity.h"
 using namespace osgEarth::Annotation;
 
 #include "makeSql.h"

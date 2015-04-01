@@ -43,6 +43,9 @@ public:
 
 	void addPipe(string pipeName,string pointName);
 
+	//heng duan fenxi ;
+	//CCSectionDlg *sectionDlg;
+	//end ---heng duan fenxi ;
 
 	//biaohui--mark
 	CAddFlagDlg *addlg;

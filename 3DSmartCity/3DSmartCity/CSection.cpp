@@ -1,6 +1,5 @@
 #include "StdAfx.h"
 #include "CSection.h"
-#include <sstream>
 
 
 CCSection::CCSection(MapNode* mapNode,osgViewer::Viewer* viewer,osg::Group * linesGroup,bool * isDrawLineStart)	
@@ -10,8 +9,10 @@ CCSection::CCSection(MapNode* mapNode,osgViewer::Viewer* viewer,osg::Group * lin
 	this->mViewer=viewer;
 	this->linesGroup=linesGroup;
 	this->isDrawLineStart=isDrawLineStart;
-	DBclass=new DBConnection();
-	DBclass->ConnectToDB(this->conn,"localhost","5432","HRBPipe","postgres","123456");
+	this->sectionDlg=new CCSectionDlg;
+	sectionDlg->Create(IDD_CSECTION);	
+	DBConnection *DBclass=new DBConnection();
+	DBclass->ConnectToDB(conn,"localhost","5432","HRBPipe","postgres","123456");
 }
 
 
@@ -74,7 +75,6 @@ bool CCSection::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapte
 			FeatureNode* pathNode = new FeatureNode(mapNode, pathFeature);
 			linesGroup->addChild( pathNode );
 			*isDrawLineStart=false;
-			
 
 			findPipes(startPoint,endPoint);
 
@@ -84,32 +84,47 @@ bool CCSection::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapte
 	return false;
 }
 
-
-string convertToString(double d) {		
-		ostringstream out;
-		out.precision(18);//覆盖默认精度
-		out << d;
-		return out.str(); //从流中取出字符串 数值现在存储在str中，等待格式化。
+string convertToString(double val)
+{
+	ostringstream os;
+	os.precision(20);
+	if (os << val)
+		return os.str();
+	return "error";
 }
 
-//根据线段两点  查找数据库中与该直线相交的管线
 void CCSection::findPipes(GeoPoint startPoint,GeoPoint endPoint)
 {
+
 	int *row_num=new int(0);
-	string sql="select line.标识码,line.管径,line.材质,line.起点埋深,line.终点埋深, \
-				point1.地面高程 as 起点高程,point2.地面高程 as 终点高程,line.建设年代,line.探测日期 \
-				from ysgpoint_new as point1,ysgpoint_new as point2,(select * from ysgline_new \
-				where st_intersects(geom,st_geomfromtext('linestring("+
-				convertToString(startPoint.y())+" "+convertToString(startPoint.x())+
-				"," +convertToString(endPoint.y())+" "+convertToString(endPoint.x())+
-				")'))=true) as line \
-				where line.起点点号=point1.物探点号 and line.终点点号=point2.物探点号";
-	res=DBclass->ExecSQL(conn,const_cast<char*>(sql.c_str()),row_num);	
+	//char * sql="select line.gid as gid , st_astext(s.geom) as startPoint ,st_astext(e.geom) as endPoint from ysgpoint84 as s , ysgpoint84 as e , ysgline84 as line where line.起点点号=s.物探点号 and line.终点点号=e.物探点号";
+	
+	string sql="select line.标识码,line.管径,line.材质,line.起点埋深,line.终点埋深,\
+				point1.地面高程 as 起点高程,point2.地面高程 as 终点高程,line.建设年代,line.探测日期\
+				from ysgpoint_new as point1,ysgpoint_new as point2,(\
+				select * from ysgline_new where st_intersects(geom,st_geomfromtext('linestring( "+
+				convertToString(startPoint.x())+" "+convertToString(startPoint.y())
+				+ "," +
+				convertToString(endPoint.x())+" "+convertToString(endPoint.y())
+				+ " )'))=true) as line	where line.起点点号=point1.物探点号 and line.终点点号=point2.物探点号";
+
+	res=DBclass->ExecSQL(conn,const_cast<char*>(sql.c_str()),row_num);
+
+	//设置listcontrol的属性
+	
+	sectionDlg->listPro.SetRedraw(false);
+
+	char *strTmp; 
 	for (int i=0;i<(*row_num);i++)
 	{
-		for (int j=1;j<8;j++)
+		strTmp=PQgetvalue(res,i,0);
+		sectionDlg->listPro.InsertItem(i,strTmp);
+		for (int j=1;j<9;j++)
 		{
-			string xx=PQgetvalue(res,i,0);
+			strTmp=PQgetvalue(res,i,j);
+			sectionDlg->listPro.SetItemText(i,j,strTmp);
 		}
 	}
+	sectionDlg->listPro.SetRedraw(true);
+	sectionDlg->ShowWindow(SW_NORMAL);
 }

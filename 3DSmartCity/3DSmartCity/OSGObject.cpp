@@ -73,6 +73,10 @@ void COSGObject::InitCameraConfig()//初始化相机
 	//begin 横断面分析
 	mCSLine=new osg::Group();
 	mRoot->addChild(mCSLine);
+	//sectionDlg=new CCSectionDlg();		
+	//sectionDlg->InitDlg();
+	//sectionDlg->Create(IDD_CSECTION);
+	//mViewer->addEventHandler(new CCSection(mapNode, mViewer,mCSLine,& isDrawLineStart,&sectionDlg));
 	mViewer->addEventHandler(new CCSection(mapNode, mViewer,mCSLine,& isDrawLineStart));
 	//end	横断面分析
 
