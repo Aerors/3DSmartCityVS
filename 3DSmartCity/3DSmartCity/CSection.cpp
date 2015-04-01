@@ -110,11 +110,32 @@ void CCSection::findPipes(GeoPoint startPoint,GeoPoint endPoint)
 
 	res=DBclass->ExecSQL(conn,const_cast<char*>(sql.c_str()),row_num);
 
-	//设置listcontrol的属性
+	//清除listcontrol;
 	sectionDlg->listPro.DeleteAllItems();
 	sectionDlg->listPro.SetRedraw(false);
+	//清除charCtrl;
+	sectionDlg->mChartCtrl.RemoveAllSeries();
+	sectionDlg->mChartCtrl.EnableRefresh(false);
+
+	//增加一个点列 增加一个线列
+	//地面
+	CChartLineSerie *pGroundSeriel=sectionDlg->mChartCtrl.CreateLineSerie();
+	pGroundSeriel->SetSeriesOrdering(poNoOrdering);//设置为无序
+	pGroundSeriel->SetName("ground");
+	
+	//管线
+	CChartLineSerie *pLineSeriel=sectionDlg->mChartCtrl.CreateLineSerie();
+	pLineSeriel->SetSeriesOrdering(poNoOrdering);//设置为无序
+	pLineSeriel->SetName("line");
+	//管线点
+	CChartPointsSerie *pPointSeriel=sectionDlg->mChartCtrl.CreatePointsSerie();
+	pPointSeriel->SetSeriesOrdering(poNoOrdering);//设置为无序	
+	pPointSeriel->SetName("point");
 
 	char *strTmp; 
+	char *startDepth, *endDepth, *startElevation,*endElevation;
+	double sdepth,edepth,sele,eele;
+	double ldepth,lele,gele;//start depth, line elevation, ground elevation;
 	for (int i=0;i<(*row_num);i++)
 	{
 		strTmp=PQgetvalue(res,i,0);
@@ -128,7 +149,46 @@ void CCSection::findPipes(GeoPoint startPoint,GeoPoint endPoint)
 			}
 			sectionDlg->listPro.SetItemText(i,j,strTmp);
 		}
+		
+		startDepth	=		PQgetvalue(res,i,3);
+		endDepth	=		PQgetvalue(res,i,4);
+		startElevation	=	PQgetvalue(res,i,5);
+		endElevation	=	PQgetvalue(res,i,6);
+
+		sdepth=atof(startDepth);
+		edepth=atof(endDepth);
+		sele=atof(startElevation);
+		eele=atof(endElevation);
+
+		ldepth=(sdepth+edepth)/2;
+		lele=(sele+eele)/2;
+
+		gele=ldepth+lele;
+
+		pGroundSeriel->AddPoint(i,gele);
+		pLineSeriel->AddPoint(i,lele);
+		pPointSeriel->AddPoint(i,lele);
+
 	}
+
+	double x[10], y[10];
+	for (int i=0; i<10; i++)
+	{
+		x[i] = i;
+		y[i] = sin(float(i))*10;
+	}
+
+	//CChartLineSerie *pLineSerie2;
+	//sectionDlg->mChartCtrl.RemoveAllSeries();//先清空
+	//pLineSerie2 = sectionDlg->mChartCtrl.CreateLineSerie();
+	//pLineSerie2->SetSeriesOrdering(poNoOrdering);//设置为无序
+	//pLineSerie2->AddPoints(x, y,10);
+	//
+
+	//pLineSerie2->SetName(_T("这是IDC_ChartCtrl1的第一条线"));//SetName的作用将在后面讲到
+
+
+	sectionDlg->mChartCtrl.EnableRefresh(true);
 	sectionDlg->listPro.SetRedraw(true);
 	sectionDlg->ShowWindow(SW_NORMAL);
 }

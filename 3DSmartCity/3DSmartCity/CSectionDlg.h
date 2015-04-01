@@ -11,6 +11,7 @@
 
 #include<string>
 #include <sstream>
+#include "e:\gitvs\3dsmartcityvs\3dsmartcity\3dsmartcity\chartctrl\chartctrl.h"
 
 #if defined _UNICODE ||defined UNICODE
 typedef std::wstring TChartString;
@@ -40,7 +41,7 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
-	CChartCtrl charCtrl;
 	virtual BOOL OnInitDialog();
 	CListCtrl listPro;
+	CChartCtrl mChartCtrl;
 };
