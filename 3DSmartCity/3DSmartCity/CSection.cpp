@@ -111,7 +111,7 @@ void CCSection::findPipes(GeoPoint startPoint,GeoPoint endPoint)
 	res=DBclass->ExecSQL(conn,const_cast<char*>(sql.c_str()),row_num);
 
 	//ÉèÖÃlistcontrolµÄÊôÐÔ
-	
+	sectionDlg->listPro.DeleteAllItems();
 	sectionDlg->listPro.SetRedraw(false);
 
 	char *strTmp; 
@@ -122,6 +122,10 @@ void CCSection::findPipes(GeoPoint startPoint,GeoPoint endPoint)
 		for (int j=1;j<9;j++)
 		{
 			strTmp=PQgetvalue(res,i,j);
+			if (j>2 && j<7)
+			{
+				strTmp[8]='\0';
+			}
 			sectionDlg->listPro.SetItemText(i,j,strTmp);
 		}
 	}
