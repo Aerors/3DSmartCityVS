@@ -1,4 +1,4 @@
-ï»¿// SmartCityTreeCtrl.cpp : å®ç°æ–‡ä»¶
+// SmartCityTreeCtrl.cpp : ÊµÏÖÎÄ¼ş
 //
 
 #include "stdafx.h"
@@ -27,33 +27,32 @@ SmartCityTreeCtrl::~SmartCityTreeCtrl()
 
 BEGIN_MESSAGE_MAP(SmartCityTreeCtrl, CTreeCtrl)
 	ON_NOTIFY_REFLECT(NM_CLICK, &SmartCityTreeCtrl::OnNMClick)
-	ON_NOTIFY_REFLECT(NM_DBLCLK, &SmartCityTreeCtrl::OnNMDblclk)
 END_MESSAGE_MAP()
 
 
 
-// SmartCityTreeCtrl æ¶ˆæ¯å¤„ç†ç¨‹åº
+// SmartCityTreeCtrl ÏûÏ¢´¦Àí³ÌĞò
 
 
 
 
 void SmartCityTreeCtrl::OnNMClick(NMHDR *pNMHDR, LRESULT *pResult)
 {
-	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
+	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	CMainFrame*  pFrame = (CMainFrame*)AfxGetApp()->m_pMainWnd;
 	SmartCityTreeView* leftView = (SmartCityTreeView*)pFrame->GetActiveFrame();
 	SmartCityTreeView* leftView001=(SmartCityTreeView*)pFrame->m_wndSplitter.GetPane(0,0);
 	CMy3DSmartCityView* pRightView = (CMy3DSmartCityView*)pFrame->m_wndSplitter.GetPane(0,1);
-	CPoint pt = GetCurrentMessage()->pt;   //è·å–å½“å‰é¼ æ ‡ç‚¹å‡»æ¶ˆæ¯çš„åæ ‡ç‚¹
+	CPoint pt = GetCurrentMessage()->pt;   //»ñÈ¡µ±Ç°Êó±êµã»÷ÏûÏ¢µÄ×ø±êµã
 	this->ScreenToClient(&pt);
 	UINT uFlags = 0;
 
-	mainFrame = (CMainFrame*)GetActiveWindow();//å°†é¼ æ ‡çš„å±å¹•åæ ‡ï¼Œè½¬æ¢æˆæ ‘å½¢æ§ä»¶çš„å®¢æˆ·åŒºåæ ‡
+	mainFrame = (CMainFrame*)GetActiveWindow();//½«Êó±êµÄÆÁÄ»×ø±ê£¬×ª»»³ÉÊ÷ĞÎ¿Ø¼şµÄ¿Í»§Çø×ø±ê
 
-	HTREEITEM hItem = this->HitTest(pt, &uFlags);//ç„¶ååšç‚¹å‡»æµ‹è¯•
+	HTREEITEM hItem = this->HitTest(pt, &uFlags);//È»ºó×öµã»÷²âÊÔ
 
 
-	if ((hItem != NULL) && (TVHT_ONITEMSTATEICON & uFlags))//å¦‚æœç‚¹å‡»çš„ä½ç½®æ˜¯åœ¨èŠ‚ç‚¹ä½ç½®ä¸Šé¢
+	if ((hItem != NULL) && (TVHT_ONITEMSTATEICON & uFlags))//Èç¹ûµã»÷µÄÎ»ÖÃÊÇÔÚ½ÚµãÎ»ÖÃÉÏÃæ
 	{
 		osgEarth::Map* map = dynamic_cast<osgEarth::Map*>(pRightView->mOSG->mapNode->getMap());
 
@@ -73,12 +72,12 @@ void SmartCityTreeCtrl::OnNMClick(NMHDR *pNMHDR, LRESULT *pResult)
 			{
 				layer = *it;
 				if(checked)
-				{//æ­¤æ—¶ç”±é€‰ä¸­åˆ°æœªé€‰ä¸­
+				{//´ËÊ±ÓÉÑ¡ÖĞµ½Î´Ñ¡ÖĞ
 					//map->removeImageLayer(layer);
-					//------wangsongwei æ›´æ”¹ä¸ºä¸å¯è§
+					//------wangsongwei ¸ü¸ÄÎª²»¿É¼û
 					layer->setVisible(false);
 				}else
-				{//æ­¤æ—¶ç”±æœªé€‰ä¸­åˆ°é€‰ä¸­
+				{//´ËÊ±ÓÉÎ´Ñ¡ÖĞµ½Ñ¡ÖĞ
 					//map->addImageLayer(layer);
 					//------wangsongwei
 					layer->setVisible(true);
@@ -89,7 +88,7 @@ void SmartCityTreeCtrl::OnNMClick(NMHDR *pNMHDR, LRESULT *pResult)
 
 		
 
-		//-----wangsongwei  æ¨¡å‹å±‚
+		//-----wangsongwei  Ä£ĞÍ²ã
 		osg::ref_ptr<osgEarth::ModelLayer> mlayer;
 		for(osgEarth::ModelLayerVector::iterator it = pRightView->mOSG->modelLayerVec.begin();it!=pRightView->mOSG->modelLayerVec.end();it++)
 		{
@@ -98,12 +97,12 @@ void SmartCityTreeCtrl::OnNMClick(NMHDR *pNMHDR, LRESULT *pResult)
 			{
 				mlayer = *it;
 				if(checked)
-				{//æ­¤æ—¶ç”±é€‰ä¸­åˆ°æœªé€‰ä¸­
+				{//´ËÊ±ÓÉÑ¡ÖĞµ½Î´Ñ¡ÖĞ
 					//map->removeImageLayer(layer);
-					//------wangsongwei æ›´æ”¹ä¸ºä¸å¯è§
+					//------wangsongwei ¸ü¸ÄÎª²»¿É¼û
 					mlayer->setVisible(false);
 				}else
-				{//æ­¤æ—¶ç”±æœªé€‰ä¸­åˆ°é€‰ä¸­
+				{//´ËÊ±ÓÉÎ´Ñ¡ÖĞµ½Ñ¡ÖĞ
 					//map->addImageLayer(layer);
 					//------wangsongwei
 					mlayer->setVisible(true);
@@ -113,27 +112,5 @@ void SmartCityTreeCtrl::OnNMClick(NMHDR *pNMHDR, LRESULT *pResult)
 		}
 		
 	}
-	*pResult = 0;
-}
-
-
-void SmartCityTreeCtrl::OnNMDblclk(NMHDR *pNMHDR, LRESULT *pResult)
-{
-	// TODO: Ã”ÃšÂ´Ã‹ÃŒÃ­Â¼Ã“Â¿Ã˜Â¼Ã¾ÃÂ¨Ã–ÂªÂ´Â¦Ã€Ã­Â³ÃŒÃÃ²Â´ÃºÃ‚Ã«
-	CPoint pt = GetCurrentMessage()->pt;   //è·å–å½“å‰é¼ æ ‡ç‚¹å‡»æ¶ˆæ¯çš„åæ ‡ç‚¹
-	UINT uFlags = 0;
-	HTREEITEM hItem = this->HitTest(pt, &uFlags);//ç„¶ååšç‚¹å‡»æµ‹è¯•
-	if ((hItem != NULL) && (TVHT_ONITEMSTATEICON & uFlags))//å¦‚æœç‚¹å‡»çš„ä½ç½®æ˜¯åœ¨èŠ‚ç‚¹ä½ç½®ä¸Šé¢
-	{
-		BOOL checked =this->GetCheck(hItem);
-		CString checkedName = this->GetItemText(hItem);
-		string layNameStr = (CT2A)checkedName.GetBuffer(0);
-		std::cout<<"layerNamestr:"<<layNameStr<<std::endl;
-
-		HighLightVisitor hlv(layNameStr);
-
-	}
-
-
 	*pResult = 0;
 }

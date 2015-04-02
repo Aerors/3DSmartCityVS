@@ -1,20 +1,20 @@
-ï»¿// è¿™æ®µ MFC ç¤ºä¾‹æºä»£ç æ¼”ç¤ºå¦‚ä½•ä½¿ç”¨ MFC Microsoft Office Fluent ç”¨æˆ·ç•Œé¢ 
-// (â€œFluent UIâ€)ã€‚è¯¥ç¤ºä¾‹ä»…ä¾›å‚è€ƒï¼Œ
-// ç”¨ä»¥è¡¥å……ã€ŠMicrosoft åŸºç¡€ç±»å‚è€ƒã€‹å’Œ 
-// MFC C++ åº“è½¯ä»¶éšé™„çš„ç›¸å…³ç”µå­æ–‡æ¡£ã€‚
-// å¤åˆ¶ã€ä½¿ç”¨æˆ–åˆ†å‘ Fluent UI çš„è®¸å¯æ¡æ¬¾æ˜¯å•ç‹¬æä¾›çš„ã€‚
-// è‹¥è¦äº†è§£æœ‰å…³ Fluent UI è®¸å¯è®¡åˆ’çš„è¯¦ç»†ä¿¡æ¯ï¼Œè¯·è®¿é—®  
-// http://msdn.microsoft.com/officeuiã€‚
+// Õâ¶Î MFC Ê¾ÀýÔ´´úÂëÑÝÊ¾ÈçºÎÊ¹ÓÃ MFC Microsoft Office Fluent ÓÃ»§½çÃæ 
+// (¡°Fluent UI¡±)¡£¸ÃÊ¾Àý½ö¹©²Î¿¼£¬
+// ÓÃÒÔ²¹³ä¡¶Microsoft »ù´¡Àà²Î¿¼¡·ºÍ 
+// MFC C++ ¿âÈí¼þËæ¸½µÄÏà¹Øµç×ÓÎÄµµ¡£
+// ¸´ÖÆ¡¢Ê¹ÓÃ»ò·Ö·¢ Fluent UI µÄÐí¿ÉÌõ¿îÊÇµ¥¶ÀÌá¹©µÄ¡£
+// ÈôÒªÁË½âÓÐ¹Ø Fluent UI Ðí¿É¼Æ»®µÄÏêÏ¸ÐÅÏ¢£¬Çë·ÃÎÊ  
+// http://msdn.microsoft.com/officeui¡£
 //
-// ç‰ˆæƒæ‰€æœ‰(C) Microsoft Corporation
-// ä¿ç•™æ‰€æœ‰æƒåˆ©ã€‚
+// °æÈ¨ËùÓÐ(C) Microsoft Corporation
+// ±£ÁôËùÓÐÈ¨Àû¡£
 
-// 3DSmartCityView.cpp : CMy3DSmartCityView ç±»çš„å®žçŽ°
+// 3DSmartCityView.cpp : CMy3DSmartCityView ÀàµÄÊµÏÖ
 //
 
 #include "stdafx.h"
-// SHARED_HANDLERS å¯ä»¥åœ¨å®žçŽ°é¢„è§ˆã€ç¼©ç•¥å›¾å’Œæœç´¢ç­›é€‰å™¨å¥æŸ„çš„
-// ATL é¡¹ç›®ä¸­è¿›è¡Œå®šä¹‰ï¼Œå¹¶å…è®¸ä¸Žè¯¥é¡¹ç›®å…±äº«æ–‡æ¡£ä»£ç ã€‚
+// SHARED_HANDLERS ¿ÉÒÔÔÚÊµÏÖÔ¤ÀÀ¡¢ËõÂÔÍ¼ºÍËÑË÷É¸Ñ¡Æ÷¾ä±úµÄ
+// ATL ÏîÄ¿ÖÐ½øÐÐ¶¨Òå£¬²¢ÔÊÐíÓë¸ÃÏîÄ¿¹²ÏíÎÄµµ´úÂë¡£
 #ifndef SHARED_HANDLERS
 #include "3DSmartCity.h"
 #endif
@@ -33,7 +33,7 @@
 IMPLEMENT_DYNCREATE(CMy3DSmartCityView, CView)
 
 BEGIN_MESSAGE_MAP(CMy3DSmartCityView, CView)
-	// æ ‡å‡†æ‰“å°å‘½ä»¤
+	// ±ê×¼´òÓ¡ÃüÁî
 	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CMy3DSmartCityView::OnFilePrintPreview)
@@ -47,14 +47,13 @@ BEGIN_MESSAGE_MAP(CMy3DSmartCityView, CView)
 	ON_COMMAND(32791, &CMy3DSmartCityView::OnBuildingOn)
 	ON_COMMAND(ID_BIAOHUION, &CMy3DSmartCityView::OnBiaohuion)
 	ON_COMMAND(ID_HENGDUANFENXION, &CMy3DSmartCityView::OnHengduanfenxion)
-	ON_COMMAND(ID_BAOGUANFENXION, &CMy3DSmartCityView::OnBaoguanfenxion)
 END_MESSAGE_MAP()
 
-// CMy3DSmartCityView æž„é€ /æžæž„
+// CMy3DSmartCityView ¹¹Ôì/Îö¹¹
 
 CMy3DSmartCityView::CMy3DSmartCityView()
 {
-	//åˆå§‹åŒ–
+	//³õÊ¼»¯
 	mOSG=0;
 	mThreadHandle=0;
 	isPipe=false;
@@ -68,13 +67,13 @@ CMy3DSmartCityView::~CMy3DSmartCityView()
 
 BOOL CMy3DSmartCityView::PreCreateWindow(CREATESTRUCT& cs)
 {
-	// TODO: åœ¨æ­¤å¤„é€šè¿‡ä¿®æ”¹
-	//  CREATESTRUCT cs æ¥ä¿®æ”¹çª—å£ç±»æˆ–æ ·å¼
+	// TODO: ÔÚ´Ë´¦Í¨¹ýÐÞ¸Ä
+	//  CREATESTRUCT cs À´ÐÞ¸Ä´°¿ÚÀà»òÑùÊ½
 
 	return CView::PreCreateWindow(cs);
 }
 
-// CMy3DSmartCityView ç»˜åˆ¶
+// CMy3DSmartCityView »æÖÆ
 
 void CMy3DSmartCityView::OnDraw(CDC* /*pDC*/)
 {
@@ -87,7 +86,7 @@ void CMy3DSmartCityView::OnDraw(CDC* /*pDC*/)
 }
 
 
-// CMy3DSmartCityView æ‰“å°
+// CMy3DSmartCityView ´òÓ¡
 
 
 void CMy3DSmartCityView::OnFilePrintPreview()
@@ -99,18 +98,18 @@ void CMy3DSmartCityView::OnFilePrintPreview()
 
 BOOL CMy3DSmartCityView::OnPreparePrinting(CPrintInfo* pInfo)
 {
-	// é»˜è®¤å‡†å¤‡
+	// Ä¬ÈÏ×¼±¸
 	return DoPreparePrinting(pInfo);
 }
 
 void CMy3DSmartCityView::OnBeginPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 {
-	// TODO: æ·»åŠ é¢å¤–çš„æ‰“å°å‰è¿›è¡Œçš„åˆå§‹åŒ–è¿‡ç¨‹
+	// TODO: Ìí¼Ó¶îÍâµÄ´òÓ¡Ç°½øÐÐµÄ³õÊ¼»¯¹ý³Ì
 }
 
 void CMy3DSmartCityView::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 {
-	// TODO: æ·»åŠ æ‰“å°åŽè¿›è¡Œçš„æ¸…ç†è¿‡ç¨‹
+	// TODO: Ìí¼Ó´òÓ¡ºó½øÐÐµÄÇåÀí¹ý³Ì
 }
 
 void CMy3DSmartCityView::OnRButtonUp(UINT /* nFlags */, CPoint point)
@@ -127,7 +126,7 @@ void CMy3DSmartCityView::OnContextMenu(CWnd* /* pWnd */, CPoint point)
 }
 
 
-// CMy3DSmartCityView è¯Šæ–­
+// CMy3DSmartCityView Õï¶Ï
 
 #ifdef _DEBUG
 void CMy3DSmartCityView::AssertValid() const
@@ -140,7 +139,7 @@ void CMy3DSmartCityView::Dump(CDumpContext& dc) const
 	CView::Dump(dc);
 }
 
-CMy3DSmartCityDoc* CMy3DSmartCityView::GetDocument() const // éžè°ƒè¯•ç‰ˆæœ¬æ˜¯å†…è”çš„
+CMy3DSmartCityDoc* CMy3DSmartCityView::GetDocument() const // ·Çµ÷ÊÔ°æ±¾ÊÇÄÚÁªµÄ
 {
 	ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CMy3DSmartCityDoc)));
 	return (CMy3DSmartCityDoc*)m_pDocument;
@@ -148,7 +147,7 @@ CMy3DSmartCityDoc* CMy3DSmartCityView::GetDocument() const // éžè°ƒè¯•ç‰ˆæœ¬æ˜¯
 #endif //_DEBUG
 
 
-// CMy3DSmartCityView æ¶ˆæ¯å¤„ç†ç¨‹åº
+// CMy3DSmartCityView ÏûÏ¢´¦Àí³ÌÐò
 
 int CMy3DSmartCityView::OnCreate(LPCREATESTRUCT lpCreateStruct)
 {
@@ -182,7 +181,7 @@ void CMy3DSmartCityView::OnInitialUpdate()
 	CView::OnInitialUpdate();
 	mOSG->InitOSG();
 	mThreadHandle=(HANDLE)_beginthread(&COSGObject::Render,0,mOSG);
-	// TODO: åœ¨æ­¤æ·»åŠ ä¸“ç”¨ä»£ç å’Œ/æˆ–è°ƒç”¨åŸºç±»
+	// TODO: ÔÚ´ËÌí¼Ó×¨ÓÃ´úÂëºÍ/»òµ÷ÓÃ»ùÀà
 
 	CMainFrame*  pFrame = (CMainFrame*)AfxGetApp()->m_pMainWnd;
 	SmartCityTreeView* leftView = (SmartCityTreeView*)pFrame->GetActiveFrame();
@@ -197,7 +196,7 @@ void CMy3DSmartCityView::OnInitialUpdate()
 	tree.ModifyStyle( TVS_CHECKBOXES, 0 );
 	tree.ModifyStyle( 0, TVS_CHECKBOXES );
 	HTREEITEM hRoot;	
-	CString str="å›¾å±‚åç§°";
+	CString str="Í¼²ãÃû³Æ";
 	hRoot=tree.InsertItem(str);
 	tree.SetCheck(hRoot);
 	HTREEITEM hChild ;
@@ -215,20 +214,20 @@ void CMy3DSmartCityView::OnDestroy()
 	if(mOSG!=0) delete mOSG;
 	WaitForSingleObject(mThreadHandle,1000);
 
-	// TODO: åœ¨æ­¤å¤„æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç 
+	// TODO: ÔÚ´Ë´¦Ìí¼ÓÏûÏ¢´¦Àí³ÌÐò´úÂë
 }
 
 
 void CMy3DSmartCityView::OnGuanxiantongjion()
 {
-	// TODO: åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
+	// TODO: ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌÐò´úÂë
 	mOSG->initStatisticDlg();
 }
 
 
 void CMy3DSmartCityView::OnPipeOn()
 {
-	// TODO: åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
+	// TODO: ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌÐò´úÂë
 	theApp.NeedModify=TRUE;
 	while(!theApp.CanModify)Sleep(1);
 	if (isFirst||!isPipe)
@@ -243,7 +242,7 @@ void CMy3DSmartCityView::OnPipeOn()
 
 void CMy3DSmartCityView::OnBuildingOn()
 {
-	// TODO: åœ¨æ­¤æ·»åŠ å‘½ä»¤å¤„ç†ç¨‹åºä»£ç 
+	// TODO: ÔÚ´ËÌí¼ÓÃüÁî´¦Àí³ÌÐò´úÂë
 	theApp.NeedModify=TRUE;
 	while(!theApp.CanModify)Sleep(1);
 	if (isFirst||isPipe)
@@ -265,7 +264,7 @@ void CMy3DSmartCityView::OnBiaohuion()
 void CMy3DSmartCityView::OnHengduanfenxion()
 {
 
-	if(IDYES==MessageBoxA(_T("æ˜¯å¦ç”»çº¿é€‰å–ç®¡çº¿?"),_T("ç®¡çº¿é€‰å–"),MB_ICONQUESTION+MB_YESNO))  
+	if(IDYES==MessageBoxA(_T("ÊÇ·ñ»­ÏßÑ¡È¡¹ÜÏß?"),_T("¹ÜÏßÑ¡È¡"),MB_ICONQUESTION+MB_YESNO))  
 	{  
 		mOSG->isDrawLineStart=true;
 	}  
@@ -274,11 +273,4 @@ void CMy3DSmartCityView::OnHengduanfenxion()
 		mOSG->isDrawLineStart=false;
 	}
 
-}
-
-
-void CMy3DSmartCityView::OnBaoguanfenxion()
-{
-	// TODO: Ã”ÃšÂ´Ã‹ÃŒÃ­Â¼Ã“ÃƒÃ¼ÃÃ®Â´Â¦Ã€Ã­Â³ÃŒÃÃ²Â´ÃºÃ‚Ã«
-	mOSG->initBgDlg();
 }

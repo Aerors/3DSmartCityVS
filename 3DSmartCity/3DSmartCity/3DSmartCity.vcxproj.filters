@@ -133,7 +133,7 @@
     <ClInclude Include="HighLightVisitor.h">
       <Filter>头文件</Filter>
     </ClInclude>
-<<<<<<< HEAD
+
     <ClInclude Include="BaoguanDlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -143,7 +143,6 @@
     <ClInclude Include="PickHandlerHighLight.h">
       <Filter>头文件</Filter>
     </ClInclude>
-=======
     <ClInclude Include="CSection.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -306,7 +305,7 @@
     <ClCompile Include="HighLightVisitor.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-<<<<<<< HEAD
+
     <ClCompile Include="BaoguanDlg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -316,7 +315,6 @@
     <ClCompile Include="PickHandlerHighLight.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-=======
     <ClCompile Include="HighLightVisitor.cpp">
       <Filter>源文件</Filter>
     </ClCompile>

@@ -73,8 +73,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\OSG\include;D:\osgEarth\osgearth-2.6\include;E:\Program Files\PostgreSQL\9.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\Program Files\PostgreSQL\9.3\lib;D:\osgEarth\osgearth-2.6\lib;D:\OSG\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\OSG\include;D:\osgEarth\osgearth-2.6\include;D:\Program Files\PostgreSQL\9.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\Program Files\PostgreSQL\9.3\lib;D:\osgEarth\osgearth-2.6\lib;D:\OSG\lib;$(LibraryPath)</LibraryPath>
     <EmbedManifest>false</EmbedManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -216,7 +216,6 @@
     <ClInclude Include="AddPipe.h" />
     <ClInclude Include="Analyze.h" />
     <ClInclude Include="BaoguanDlg.h" />
-=======
     <ClInclude Include="ChartCtrl\ChartAxis.h" />
     <ClInclude Include="ChartCtrl\ChartAxisLabel.h" />
     <ClInclude Include="ChartCtrl\ChartBalloonLabel.h" />
@@ -278,7 +277,6 @@
     <ClCompile Include="AddPipe.cpp" />
     <ClCompile Include="Analyze.cpp" />
     <ClCompile Include="BaoguanDlg.cpp" />
-=======
     <ClCompile Include="ChartCtrl\ChartAxis.cpp" />
     <ClCompile Include="ChartCtrl\ChartAxisLabel.cpp" />
     <ClCompile Include="ChartCtrl\ChartBarSerie.cpp" />

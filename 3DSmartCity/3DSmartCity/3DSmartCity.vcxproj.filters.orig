@@ -133,6 +133,18 @@
     <ClInclude Include="HighLightVisitor.h">
       <Filter>头文件</Filter>
     </ClInclude>
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <ClInclude Include="BaoguanDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Analyze.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PickHandlerHighLight.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+=======
     <ClInclude Include="CSection.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -241,6 +253,9 @@
     <ClInclude Include="ChartCtrl\ChartLabel.h">
       <Filter>ChartCtrl</Filter>
     </ClInclude>
+>>>>>>> origin/master
+=======
+>>>>>>> parent of 7f6a715... 爆管分析
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="3DSmartCity.cpp">
@@ -294,6 +309,18 @@
     <ClCompile Include="HighLightVisitor.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <ClCompile Include="BaoguanDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Analyze.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PickHandlerHighLight.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+=======
     <ClCompile Include="HighLightVisitor.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -375,6 +402,9 @@
     <ClCompile Include="ChartCtrl\ChartGrid.cpp">
       <Filter>ChartCtrl</Filter>
     </ClCompile>
+>>>>>>> origin/master
+=======
+>>>>>>> parent of 7f6a715... 爆管分析
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="3DSmartCity.rc">
