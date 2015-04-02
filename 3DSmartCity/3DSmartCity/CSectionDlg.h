@@ -11,7 +11,7 @@
 
 #include<string>
 #include <sstream>
-#include "e:\gitvs\3dsmartcityvs\3dsmartcity\3dsmartcity\chartctrl\chartctrl.h"
+#include "ChartCtrl\ChartCtrl.h"
 
 #if defined _UNICODE ||defined UNICODE
 typedef std::wstring TChartString;
