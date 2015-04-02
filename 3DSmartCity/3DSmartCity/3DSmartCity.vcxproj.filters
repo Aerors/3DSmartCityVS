@@ -130,6 +130,9 @@
     <ClInclude Include="HeadFiles.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="HighLightVisitor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
     <ClInclude Include="CSection.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -286,6 +289,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="PipePoint.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="HighLightVisitor.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="HighLightVisitor.cpp">

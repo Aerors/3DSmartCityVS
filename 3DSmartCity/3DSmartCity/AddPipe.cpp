@@ -1,6 +1,6 @@
 #include "StdAfx.h"
 #include "AddPipe.h"
-
+#include "HighLightVisitor.h"
 
 AddPipe::AddPipe(void)
 {
@@ -105,6 +105,78 @@ void AddPipe::Addpipes(MapNode * mapNode)
 	}
 }
 
+osg::Group* AddPipe::Addpipes(MapNode * mapNode,osg::Group * mRoot)
+{
+	osg::ref_ptr<osg::Group>  pipeGroup=new osg::Group;
+	DBConnection *DBclass=new DBConnection();
+	PGconn *conn;
+	PGresult *res;
+	int *row_num=new int(0);
+	//char * sql="select line.gid as gid , st_astext(s.geom) as startPoint ,st_astext(e.geom) as endPoint from ysgpoint84 as s , ysgpoint84 as e , ysgline84 as line where line.起点点号=s.物探点号 and line.终点点号=e.物探点号";
+	string sql="select line.标识码 as gid , st_astext(s.geom) as startPoint,s.地面高程\
+			   as startpointelevation ,st_astext(e.geom) as endPoint,e.地面高程 as endpointelevation\
+			   from "+pointTableName+" as s , "+pointTableName+" as e , "+
+			   lineTableName+" as line where line.起点点号=s.物探点号 and line.终点点号=e.物探点号";
+	DBclass->ConnectToDB(conn,this->host,this->port,this->database,this->userName,this->pwd);
+	res=DBclass->ExecSQL(conn,const_cast<char*>(sql.c_str()),row_num);
+	char * startPointLatLon, * endPointLatLon , *startPointElevation, * endPointElevation;
+	PipePoint * startPoint, * endPoint;
+	if (res!=NULL)
+	{
+		osg::ref_ptr<osgModeling::Curve> section =new osgModeling::Curve();
+		//生成圆环横截面
+		{
+			osg::ref_ptr<osg::Vec3Array> pathArray = new osg::Vec3Array;
+			osg::Vec3 center = osg::Vec3(0.0f,0.0f,0.0f);
+			//double radius=1.0f;
+			int numSamples=50;
+			float yaw = 0.0f;
+			float yaw_delta = 2.0f*osg::PI/((float)numSamples-1.0f);
+
+			for(int i=0;i<numSamples;++i)
+			{
+				osg::Vec3 position(center+osg::Vec3(sinf(yaw)*RADIUS,cosf(yaw)*RADIUS,0.0f));
+				yaw -= yaw_delta;
+				pathArray->push_back(position);		
+			}			
+			section->setPath(pathArray.get());			
+		}
+
+		for (int i=0;i<(*row_num);i++)
+		{
+			lineID=this->callBackValue(PQgetvalue,res,i,0);
+			startPointLatLon=this->callBackValue(PQgetvalue,res,i,1);
+			startPointElevation=this->callBackValue(PQgetvalue,res,i,2);
+			endPointLatLon= this->callBackValue(PQgetvalue,res,i,3);			
+			endPointElevation=this->callBackValue(PQgetvalue,res,i,4);
+
+			//试验用数据
+			//startPointElevation="155.0";
+			//endPointElevation="155.0";
+			
+			startPoint=new PipePoint(startPointLatLon,startPointElevation);
+			endPoint =new PipePoint(endPointLatLon,endPointElevation);
+
+			this->APipe(mapNode,pipeGroup,section,startPoint,endPoint,lineID);
+			//this->ASphere(mapNode,root,startPoint,RADIUS);
+		}
+	}
+	
+	//ModelLayer* pipeLayer=new ModelLayer(lineTableName,pipeGroup);
+	//mapNode->getMap()->addModelLayer(pipeLayer);
+	mRoot->addChild(pipeGroup.get());
+	pipeGroup->setName("pipes");
+	pipeGroup->getOrCreateStateSet()->setMode(GL_LIGHTING,osg::StateAttribute::OFF | osg::StateAttribute::OVERRIDE);
+	//pipeGroup->getOrCreateStateSet()->setAttribute(
+	
+	if (*row_num !=0)
+	{
+		delete startPoint;
+		delete endPoint;
+		delete DBclass;
+	}
+	return pipeGroup.get();
+}
 
 void AddPipe::APipe(MapNode * mapNode,osg::Group * group,osg::ref_ptr<osgModeling::Curve> section,PipePoint *startPoint, PipePoint * endPoint,char * lineID)
 {	
@@ -136,12 +208,13 @@ void AddPipe::APipe(MapNode * mapNode,osg::Group * group,osg::ref_ptr<osgModelin
 		geom->setColorArray(colors, osg::Array::BIND_PER_PRIMITIVE_SET);
 
 		geode->addDrawable( geom.get() );
-		geode->setName(string(lineTableName)+lineID);
+		geode->setName(string(lineTableName)+" "+lineID);
 	}
 	//变换到地球坐标系  修改为平移至地球表面
 	{
 		mt->setMatrix(osg::Matrixd::translate(a,b,c));
 		mt->addChild(geode);  
+		mt->setName(lineTableName);
 		group->addChild(mt);
 	}
 

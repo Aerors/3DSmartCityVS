@@ -1,6 +1,9 @@
 #include "StdAfx.h"
 #include "PipePoint.h"
 
+PipePoint::PipePoint()
+{
+}
 
 PipePoint::PipePoint(char * point ,char * elevation)
 {
@@ -16,6 +19,13 @@ PipePoint::PipePoint(char * point ,char * elevation)
 	str2 = pointStr.substr(l+1,m-l-1);
 	_lon=atof(str1.c_str());
 	_lat=atof(str2.c_str());	
+}
+
+PipePoint::PipePoint(double lat, double lon, double ele)
+{
+	_lat = lat;
+	_lon = lon;
+	_ele = ele;
 }
 
 

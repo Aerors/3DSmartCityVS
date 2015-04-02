@@ -29,7 +29,7 @@ public:
 	~PipeStatisticHandler(void);
 private:
 	void drawRect();
-	//string makePolySql(const double topleftlat,const double topleftlon,const double bottomrightlat,const double bottomrightlon);
+	std::vector<std::string> bzms;//保存上次查询到的标识码
 protected:
 
 	void Pick(float x,float y );

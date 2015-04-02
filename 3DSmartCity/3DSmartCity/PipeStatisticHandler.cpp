@@ -2,6 +2,7 @@
 #include "windows.h"
 #include "PipeStatisticHandler.h"
 #include "DBConnection.h"
+#include "HighLightVisitor.h"
 
 PipeStatisticHandler::PipeStatisticHandler(osgViewer::Viewer* viewer,osgEarth::MapNode* mapNode,StatisticDialog** ppStatisticDlg,osg::Group** pprect)
 {
@@ -79,6 +80,14 @@ bool PipeStatisticHandler::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIAct
 
 				if (firstClickedFlag)
 				{//第二次双击
+					for(std::vector<std::string>::iterator it=bzms.begin();it!=bzms.end();it++)
+					{
+						std::string bzm("ysgline_new "+ *(it));
+						osg::Node* root= mViewer->getSceneData();
+						HighLightVisitor hlv(bzm,false);
+						root->accept(hlv);
+					}
+
 					//ASSERT(selectPts[0].x!=0 &&selectPts[0].y!=0);
 					(*ppStatisticDlg)->m_rightlat=ConvertPoint.y();
 					(*ppStatisticDlg)->m_rightlon=ConvertPoint.x();
@@ -103,25 +112,35 @@ bool PipeStatisticHandler::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIAct
 
 					drawRect();
 
-					//select 标识码 from (select *,st_contains(st_geomfromtext('POLYGON((126.652002305689 45.7528259108467, 
-					//126.653364042412 45.7528259108467, 126.653364042412 45.747337756813, 126.652002305689 45.747337756813, 126.652002305689 45.7528259108467))'),ysgline_new.geom)
-					//as isContain from ysgline_new ) as queryresult where isContain=true
-
-					//char * sql="select gid as gid , st_astext(s.geom) as startPoint,s.地面高程 as startpointelevation ,st_astext(e.geom) as endPoint,e.地面高程 as endpointelevation  from ysgpoint84 as s , ysgpoint84 as e , ysgline84 as line where line.起点点号=s.物探点号 and line.终点点号=e.物探点号";
-					(*ppStatisticDlg)->m_list.DeleteAllItems();
 					DBConnection reader;
 					makeSql ms;
 					reader.ConnectToDB("localhost","5432","HRBPipe","postgres","123456");
 					string sql = ms.makePolySql((*ppStatisticDlg)->m_leftlat,(*ppStatisticDlg)->m_leftlon,(*ppStatisticDlg)->m_rightlat,(*ppStatisticDlg)->m_rightlon);
 					PGresult* res = reader.ExecSQL(const_cast<char*>(sql.c_str()));
+
 					int field_num=PQnfields(res);
 					int tuple_num=PQntuples(res);
+
+					(*ppStatisticDlg)->m_list.DeleteAllItems();
+					bzms.erase(bzms.begin(),bzms.end());
+					ASSERT(bzms.empty());
+
 					for(int j=0;j<tuple_num;++j)
 					{
 						char* s = PQgetvalue(res,j,0);
 						char* t = PQgetvalue(res,j,1);
 						int nRow = (*ppStatisticDlg)->m_list.InsertItem(0, s);//插入行
 						(*ppStatisticDlg)->m_list.SetItemText(nRow, 1, t);//设置数据
+
+						bzms.push_back(std::string(t));
+					}
+
+					for(std::vector<std::string>::iterator it=bzms.begin();it!=bzms.end();it++)
+					{
+						std::string bzm("ysgline_new "+ *(it));
+						osg::Node* root= mViewer->getSceneData();
+						HighLightVisitor hlv(bzm,true);
+						root->accept(hlv);
 					}
 
 					firstClickedFlag = false;
@@ -130,7 +149,6 @@ bool PipeStatisticHandler::handle(const osgGA::GUIEventAdapter& ea,osgGA::GUIAct
 				{//第一次双击
 					(*ppStatisticDlg)->m_leftlat = ConvertPoint.y();
 					(*ppStatisticDlg)->m_leftlon = ConvertPoint.x();
-					//(*ppRect)->setLowerRight(GeoPoint(m_pGeoSRS, ConvertPoint.x(),ConvertPoint.y()));
 
 					firstClickedFlag = true;
 				}

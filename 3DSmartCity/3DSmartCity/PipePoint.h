@@ -1,12 +1,13 @@
-#include "StdAfx.h"
-#include "HeadFiles.h"
+#pragma once
 #include <string>
 using namespace std;
 
 class PipePoint
 {
 public:
+	PipePoint();
 	PipePoint(char * point ,char * elevation);
+	PipePoint(double lan, double lon, double ele);
 	~PipePoint(void);
 private:
 	double _lat;

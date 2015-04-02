@@ -251,6 +251,7 @@
     <ClInclude Include="CTChart.h" />
     <ClInclude Include="DBConnection.h" />
     <ClInclude Include="HeadFiles.h" />
+    <ClInclude Include="HighLightVisitor.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="makeSql.h" />
     <ClInclude Include="OSGObject.h" />
