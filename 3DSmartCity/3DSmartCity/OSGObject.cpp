@@ -35,6 +35,12 @@ void COSGObject::InitSceneGraph()
 	mRoot->addChild(mp);
 	mRoot->addChild(mLabels);
 	mapNode=dynamic_cast<osgEarth::MapNode*>(mp.get());
+
+
+	osg::StateSet* stateset = mapNode->getOrCreateStateSet();
+	stateset->setMode(GL_LIGHTING,osg::StateAttribute::OFF);
+	stateset->setMode(GL_DEPTH_TEST,osg::StateAttribute::ON);
+
 	
 }
 void COSGObject::InitCameraConfig()//初始化相机
@@ -62,6 +68,8 @@ void COSGObject::InitCameraConfig()//初始化相机
 	camera->setGraphicsContext(gc);
 	camera->setViewport(new osg::Viewport(traits->x,traits->y,traits->width,traits->height));
 	camera->setProjectionMatrixAsPerspective(30.0f,static_cast<double> (traits->width)/static_cast<double>(traits->height),1.0,1000.0);
+
+	camera->setRenderOrder(Camera::POST_RENDER);
 
 	//begin   dialog of mark
 	addlg=new CAddFlagDlg();
