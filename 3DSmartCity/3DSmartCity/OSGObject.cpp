@@ -43,8 +43,7 @@ void COSGObject::InitSceneGraph()
 	mapNode=dynamic_cast<osgEarth::MapNode*>(mp.get());
 
 
-	//osg::StateSet* stateset = mapNode->getOrCreateStateSet();
-	osg::StateSet* stateset = mRoot->getOrCreateStateSet();
+	osg::StateSet* stateset = mapNode->getOrCreateStateSet();
 	stateset->setMode(GL_LIGHTING,osg::StateAttribute::OFF);
 	stateset->setMode(GL_DEPTH_TEST,osg::StateAttribute::ON);
 

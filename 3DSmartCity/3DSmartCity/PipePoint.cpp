@@ -7,7 +7,7 @@ PipePoint::PipePoint()
 
 PipePoint::PipePoint(char * point ,char * elevation)
 {
-	_ele=atof(elevation)-10;
+	_ele=atof(elevation)-0;
 
 	string pointStr=string(point);
 	int m,n,l;
