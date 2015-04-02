@@ -25,6 +25,7 @@ bool CCSection::handle( const osgGA::GUIEventAdapter& ea, osgGA::GUIActionAdapte
 {
 	if (*isDrawLineStart)
 	{
+		linesGroup->removeChild(0,1);
 		if (!clickTime && ea.getEventType() == osgGA::GUIEventAdapter::LEFT_MOUSE_BUTTON )
 		{	
 			clickTime=true;
@@ -130,7 +131,7 @@ void CCSection::findPipes(GeoPoint startPoint,GeoPoint endPoint)
 	//管线点
 	CChartPointsSerie *pPointSeriel=sectionDlg->mChartCtrl.CreatePointsSerie();
 	pPointSeriel->SetSeriesOrdering(poNoOrdering);//设置为无序	
-	pPointSeriel->SetName("point");
+	pPointSeriel->SetName("pipe");
 
 	char *strTmp; 
 	char *startDepth, *endDepth, *startElevation,*endElevation;
@@ -178,16 +179,7 @@ void CCSection::findPipes(GeoPoint startPoint,GeoPoint endPoint)
 		y[i] = sin(float(i))*10;
 	}
 
-	//CChartLineSerie *pLineSerie2;
-	//sectionDlg->mChartCtrl.RemoveAllSeries();//先清空
-	//pLineSerie2 = sectionDlg->mChartCtrl.CreateLineSerie();
-	//pLineSerie2->SetSeriesOrdering(poNoOrdering);//设置为无序
-	//pLineSerie2->AddPoints(x, y,10);
-	//
-
-	//pLineSerie2->SetName(_T("这是IDC_ChartCtrl1的第一条线"));//SetName的作用将在后面讲到
-
-
+	sectionDlg->mChartCtrl.GetLegend()->SetVisible(true);
 	sectionDlg->mChartCtrl.EnableRefresh(true);
 	sectionDlg->listPro.SetRedraw(true);
 	sectionDlg->ShowWindow(SW_NORMAL);
