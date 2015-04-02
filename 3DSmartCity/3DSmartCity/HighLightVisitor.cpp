@@ -2,10 +2,11 @@
 #include "HighLightVisitor.h"
 #include <osg/Geometry>
 
-HighLightVisitor::HighLightVisitor(std::string str)
+HighLightVisitor::HighLightVisitor(std::string str,bool makeithighlight)
 	:osg::NodeVisitor(TRAVERSE_ALL_CHILDREN)
 {
 	m_bzm = str;
+	highlightFlag = makeithighlight;
 }
 
 
@@ -23,18 +24,36 @@ void HighLightVisitor::apply(osg::Geode& node)
 	if(node.getName() == m_bzm)
 	{
 		osg::Geometry* tmpGeom = dynamic_cast<osg::Geometry*>(node.getDrawable(0));
-		if(tmpGeom)
+		if(highlightFlag)
 		{
-			osg::Vec4Array* tmpColorArray = dynamic_cast<osg::Vec4Array*>(tmpGeom->getColorArray());
-			if(tmpColorArray)
+			if(tmpGeom)
 			{
-				osg::Vec4Array::iterator iter = tmpColorArray->begin();
-				for(iter; iter!=tmpColorArray->end(); iter++)
+				osg::Vec4Array* tmpColorArray = dynamic_cast<osg::Vec4Array*>(tmpGeom->getColorArray());
+				if(tmpColorArray)
 				{
-					iter->set(1.0,1.0,0.0,0.5);
+					osg::Vec4Array::iterator iter = tmpColorArray->begin();
+					for(iter; iter!=tmpColorArray->end(); iter++)
+					{
+						iter->set(1.0,1.0,0.0,0.5);
+					}
+				}
+			}
+		}else
+		{
+			if(tmpGeom)
+			{
+				osg::Vec4Array* tmpColorArray = dynamic_cast<osg::Vec4Array*>(tmpGeom->getColorArray());
+				if(tmpColorArray)
+				{
+					osg::Vec4Array::iterator iter = tmpColorArray->begin();
+					for(iter; iter!=tmpColorArray->end(); iter++)
+					{
+						iter->set(0.0,0.0,1.0,0.8);
+					}
 				}
 			}
 		}
+		
 		tmpGeom->dirtyDisplayList();
 		return;
 	}

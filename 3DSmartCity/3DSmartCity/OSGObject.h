@@ -14,7 +14,13 @@
 #include "AddPipe.h"
 #include "AddFlagDlg.h"
 #include "AddClick.h"
+<<<<<<< HEAD
 #include "BaoguanDlg.h"
+=======
+#include "CSection.h"
+#include "CSectionDlg.h"
+
+>>>>>>> origin/master
 
 using namespace osgEarth;
 class COSGObject
@@ -41,6 +47,9 @@ public:
 
 	void addPipe(string pipeName,string pointName);
 
+	//heng duan fenxi ;
+	//CCSectionDlg *sectionDlg;
+	//end ---heng duan fenxi ;
 
 	//biaohui--mark
 	CAddFlagDlg *addlg;

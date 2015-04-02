@@ -7,13 +7,14 @@ class HighLightVisitor :
 	public osg::NodeVisitor
 {
 public:
-	HighLightVisitor(std::string str);
+	HighLightVisitor(std::string str,bool makeithighlight);
 	~HighLightVisitor(void);
 
 	virtual void apply(osg::Geode& node);
 
 private:
 	std::string m_bzm;//±êÊ¶Âë
+	bool		highlightFlag;
 
 };
 

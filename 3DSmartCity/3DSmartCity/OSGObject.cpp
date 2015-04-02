@@ -40,6 +40,13 @@ void COSGObject::InitSceneGraph()
 	mRoot->addChild(mp);
 	mRoot->addChild(mLabels);
 	mapNode=dynamic_cast<osgEarth::MapNode*>(mp.get());
+
+
+	//osg::StateSet* stateset = mapNode->getOrCreateStateSet();
+	osg::StateSet* stateset = mRoot->getOrCreateStateSet();
+	stateset->setMode(GL_LIGHTING,osg::StateAttribute::OFF);
+	stateset->setMode(GL_DEPTH_TEST,osg::StateAttribute::ON);
+
 	
 }
 void COSGObject::InitCameraConfig()//初始化相机
@@ -68,6 +75,8 @@ void COSGObject::InitCameraConfig()//初始化相机
 	camera->setViewport(new osg::Viewport(traits->x,traits->y,traits->width,traits->height));
 	camera->setProjectionMatrixAsPerspective(30.0f,static_cast<double> (traits->width)/static_cast<double>(traits->height),1.0,1000.0);
 
+	camera->setRenderOrder(Camera::POST_RENDER);
+
 	//begin   dialog of mark
 	addlg=new CAddFlagDlg();
 	addlg->Create(IDD_ADD_DIALOG);
@@ -76,6 +85,13 @@ void COSGObject::InitCameraConfig()//初始化相机
 	//end     dialog of mark
 
 	//begin 横断面分析
+	mCSLine=new osg::Group();
+	mRoot->addChild(mCSLine);
+	//sectionDlg=new CCSectionDlg();		
+	//sectionDlg->InitDlg();
+	//sectionDlg->Create(IDD_CSECTION);
+	//mViewer->addEventHandler(new CCSection(mapNode, mViewer,mCSLine,& isDrawLineStart,&sectionDlg));
+	mViewer->addEventHandler(new CCSection(mapNode, mViewer,mCSLine,& isDrawLineStart));
 	//end	横断面分析
 
 	//dc begin	管线统计---------------------------------------
@@ -138,11 +154,19 @@ void COSGObject::InitOsgEarth()
 	}
 	em->getSettings()->setArcViewpointTransitions(true);
 	mViewer->setCameraManipulator(em);
+<<<<<<< HEAD
 	//添加视野控制
 	em->setViewpoint( osgEarth::Viewpoint(
 		126.660, 45.75, 20,   // longitude, latitude, altitude
 		24.261, -29.6, 3450.0), // heading, pitch, range
 		5.0 );
+=======
+	em->setViewpoint( osgEarth::Viewpoint(
+		126.659, 45.746, 20,   // longitude, latitude, altitude
+		24.261, -29.6, 3450.0), // heading, pitch, range
+		5.0 );
+
+>>>>>>> origin/master
 
 	//初始化天空
 	osgEarth::Config skyConf;
@@ -153,14 +177,14 @@ void COSGObject::InitOsgEarth()
 	skyNode->attach(mViewer,3);
 	mRoot->addChild(skyNode);
 
-	//添加雨水管图层
+	//添加雨水管图层;
 	map<string, string>::iterator pipes_iter;
 	for (pipes_iter=pipes->begin();pipes_iter!=pipes->end();pipes_iter++)
 	{
 		addPipe(pipes_iter->first,pipes_iter->second);
 	}
 
-	//获取图层
+	//获取图层;
 	mapNode->getMap()->getImageLayers(imageLayerVec);
 	for (osgEarth::ImageLayerVector::iterator it=imageLayerVec.begin();it!=imageLayerVec.end();it++)
 	{
@@ -172,47 +196,48 @@ void COSGObject::InitOsgEarth()
 		layernames.push_back(it->get()->getName());
 	}
 
-	china_boundaries=mapNode->getMap()->getImageLayerByName("world_boundaries");
+	//china_boundaries=mapNode->getMap()->getImageLayerByName("world_boundaries");
 
 	osg::StateSet* stateset = mapNode->getOrCreateStateSet();
 	stateset->setMode(GL_LIGHTING,osg::StateAttribute::OFF);
 	stateset->setMode(GL_DEPTH_TEST,osg::StateAttribute::ON);
 
 }
-void COSGObject::setChinaBoundariesOpacity(double opt)
-{
-	if(china_boundaries)
-	{
-		china_boundaries->setOpacity(opt);
-	}
-}
-double COSGObject::getChinaBoundariesOpacity()
-{
-	if(china_boundaries)
-	{
-		return china_boundaries->getOpacity();
-	}
-	else
-	{
-		return -1;
-	}
-}
-void COSGObject::rmvChinaBounds()
-{
 
-	if(china_boundaries)
-	{
-		mapNode->getMap()->removeImageLayer(china_boundaries);
-
-	}
-}
-void COSGObject::addChinaBounds()
-{
-	if(china_boundaries)
-	{
-		mapNode->getMap()->addImageLayer(china_boundaries);
-	}
-}
+//void COSGObject::setChinaBoundariesOpacity(double opt)
+//{
+//	if(china_boundaries)
+//	{
+//		china_boundaries->setOpacity(opt);
+//	}
+//}
+//double COSGObject::getChinaBoundariesOpacity()
+//{
+//	if(china_boundaries)
+//	{
+//		return china_boundaries->getOpacity();
+//	}
+//	else
+//	{
+//		return -1;
+//	}
+//}
+//void COSGObject::rmvChinaBounds()
+//{
+//
+//	if(china_boundaries)
+//	{
+//		mapNode->getMap()->removeImageLayer(china_boundaries);
+//
+//	}
+//}
+//void COSGObject::addChinaBounds()
+//{
+//	if(china_boundaries)
+//	{
+//		mapNode->getMap()->addImageLayer(china_boundaries);
+//	}
+//}
 
 void COSGObject::addPipe(string pipeName,string pointName)
 {
