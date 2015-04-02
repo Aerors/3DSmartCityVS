@@ -11,12 +11,17 @@ COSGObject::COSGObject(HWND hWnd)
 	pStatisticDlg =  new StatisticDialog();
 	pipes=new map<string ,string>;
 	pipes->insert(pair<string,string>("ysgline_new","ysgpoint_new"));
+
+	bgDlg = new CBaoguanDlg();
 }
 
 
 COSGObject::~COSGObject(void)
 {
-
+	mViewer->setDone(true);
+	Sleep(1000);
+	mViewer->stopThreading();
+	delete mViewer;
 }
 
 void COSGObject::InitOSG()
@@ -79,7 +84,7 @@ void COSGObject::InitCameraConfig()//初始化相机
 	mRoot->addChild(pRectNodeGroup);
 	mViewer->addEventHandler(new PipeStatisticHandler(mViewer,mapNode.get(),&pStatisticDlg,&pRectNodeGroup));
 	//dc end	管线统计---------------------------------------
-
+	//mViewer->addSlave(camera);
 	mViewer->setCamera(camera);
 	//mViewer->setCameraManipulator(new osgGA::TrackballManipulator);
 	mViewer->setSceneData(mRoot);
@@ -89,6 +94,9 @@ void COSGObject::InitCameraConfig()//初始化相机
 
 	mViewer->addEventHandler(new osgGA::StateSetManipulator(mViewer->getCamera()->getOrCreateStateSet()));
 
+	//爆管分析
+	bgDlg->Create(IDD_DIALOG_BAOGUAN);
+	bgDlg->initDlgToGetOSGParam(mapNode,em,mViewer,mRoot);
 }
 void COSGObject::PreFrameUpdate()
 {
@@ -130,6 +138,11 @@ void COSGObject::InitOsgEarth()
 	}
 	em->getSettings()->setArcViewpointTransitions(true);
 	mViewer->setCameraManipulator(em);
+	//添加视野控制
+	em->setViewpoint( osgEarth::Viewpoint(
+		126.660, 45.75, 20,   // longitude, latitude, altitude
+		24.261, -29.6, 3450.0), // heading, pitch, range
+		5.0 );
 
 	//初始化天空
 	osgEarth::Config skyConf;
@@ -160,6 +173,10 @@ void COSGObject::InitOsgEarth()
 	}
 
 	china_boundaries=mapNode->getMap()->getImageLayerByName("world_boundaries");
+
+	osg::StateSet* stateset = mapNode->getOrCreateStateSet();
+	stateset->setMode(GL_LIGHTING,osg::StateAttribute::OFF);
+	stateset->setMode(GL_DEPTH_TEST,osg::StateAttribute::ON);
 
 }
 void COSGObject::setChinaBoundariesOpacity(double opt)
@@ -297,4 +314,10 @@ void COSGObject::addFlag()
 		}		
 		addlg->ShowWindow(SW_NORMAL);
 	}	
+}
+
+
+void COSGObject::initBgDlg()
+{
+	bgDlg->ShowWindow(SW_NORMAL);
 }

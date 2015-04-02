@@ -14,7 +14,7 @@
 #include "AddPipe.h"
 #include "AddFlagDlg.h"
 #include "AddClick.h"
-
+#include "BaoguanDlg.h"
 
 using namespace osgEarth;
 class COSGObject
@@ -47,6 +47,11 @@ public:
 	bool closeWindows;
 	void addFlag();	
 	osg::ref_ptr<osg::Group> mLabels;
+
+	//爆管分析
+	CBaoguanDlg *bgDlg;
+	void addBgDlg();
+	void initBgDlg();
 
 	//画线启用标志
 	bool isDrawLineStart;

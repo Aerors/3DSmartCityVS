@@ -73,8 +73,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\OSG\include;D:\osgEarth\osgearth-2.6\include;D:\Program Files\PostgreSQL\9.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>D:\Program Files\PostgreSQL\9.3\lib;D:\osgEarth\osgearth-2.6\lib;D:\OSG\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\OSG\include;D:\osgEarth\osgearth-2.6\include;E:\Program Files\PostgreSQL\9.3\include;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\Program Files\PostgreSQL\9.3\lib;D:\osgEarth\osgearth-2.6\lib;D:\OSG\lib;$(LibraryPath)</LibraryPath>
     <EmbedManifest>false</EmbedManifest>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -210,12 +210,15 @@
     <ClInclude Include="AddClick.h" />
     <ClInclude Include="AddFlagDlg.h" />
     <ClInclude Include="AddPipe.h" />
+    <ClInclude Include="Analyze.h" />
+    <ClInclude Include="BaoguanDlg.h" />
     <ClInclude Include="DBConnection.h" />
     <ClInclude Include="HeadFiles.h" />
     <ClInclude Include="HighLightVisitor.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="makeSql.h" />
     <ClInclude Include="OSGObject.h" />
+    <ClInclude Include="PickHandlerHighLight.h" />
     <ClInclude Include="PipePoint.h" />
     <ClInclude Include="PipeStatisticHandler.h" />
     <ClInclude Include="Resource.h" />
@@ -232,11 +235,14 @@
     <ClCompile Include="AddClick.cpp" />
     <ClCompile Include="AddFlagDlg.cpp" />
     <ClCompile Include="AddPipe.cpp" />
+    <ClCompile Include="Analyze.cpp" />
+    <ClCompile Include="BaoguanDlg.cpp" />
     <ClCompile Include="DBConnection.cpp" />
     <ClCompile Include="HighLightVisitor.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="makeSql.cpp" />
     <ClCompile Include="OSGObject.cpp" />
+    <ClCompile Include="PickHandlerHighLight.cpp" />
     <ClCompile Include="PipePoint.cpp" />
     <ClCompile Include="PipeStatisticHandler.cpp" />
     <ClCompile Include="SmartCityTreeCtrl.cpp" />
